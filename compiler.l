@@ -38,6 +38,7 @@ else                 { colNo+=4; return ELSE; }
 while                { colNo+=5; return WHILE; }
 printf               { colNo+=6; return PRINTF; }
 scanf                { colNo+=5; return SCANF; }
+run                  { return RUN;}
 \".*\"               { 
                         colNo+=strlen(yytext); 
                         yylval.stringVal=new char[strlen(yytext)-1];
@@ -58,6 +59,7 @@ scanf                { colNo+=5; return SCANF; }
                         yylval.key=new std::string(yytext);
                         return IDENTIF;
                      }
+[a-zA-Z0-9_]+\.txt     { yylval.key=new std::string(yytext);return FILENAME; } 
 [+-]?[0-9]+          { 
                         yylloc.first_line=lineNo;
                         yylloc.first_column=colNo;

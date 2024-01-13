@@ -45,7 +45,7 @@
 extern int yydebug;
 #endif
 /* "%code requires" blocks.  */
-#line 25 "compiler.y"
+#line 27 "compiler.y"
 
     #include "compiler.h"
 
@@ -61,27 +61,29 @@ extern int yydebug;
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
     ERROR = 258,                   /* ERROR  */
-    INT = 259,                     /* INT  */
-    FLOAT = 260,                   /* FLOAT  */
-    DOUBLE = 261,                  /* DOUBLE  */
-    IF = 262,                      /* IF  */
-    ELSE = 263,                    /* ELSE  */
-    WHILE = 264,                   /* WHILE  */
-    RETURN = 265,                  /* RETURN  */
-    EQ = 266,                      /* EQ  */
-    NE = 267,                      /* NE  */
-    LT = 268,                      /* LT  */
-    LE = 269,                      /* LE  */
-    GT = 270,                      /* GT  */
-    GE = 271,                      /* GE  */
-    SCANF = 272,                   /* SCANF  */
-    PRINTF = 273,                  /* PRINTF  */
-    IDENTIF = 274,                 /* IDENTIF  */
-    INT_VALUE = 275,               /* INT_VALUE  */
-    FLOAT_VALUE = 276,             /* FLOAT_VALUE  */
-    DOUBLE_VALUE = 277,            /* DOUBLE_VALUE  */
-    STRING = 278,                  /* STRING  */
-    IFX = 279                      /* IFX  */
+    RUN = 259,                     /* RUN  */
+    INT = 260,                     /* INT  */
+    FLOAT = 261,                   /* FLOAT  */
+    DOUBLE = 262,                  /* DOUBLE  */
+    IF = 263,                      /* IF  */
+    ELSE = 264,                    /* ELSE  */
+    WHILE = 265,                   /* WHILE  */
+    RETURN = 266,                  /* RETURN  */
+    EQ = 267,                      /* EQ  */
+    NE = 268,                      /* NE  */
+    LT = 269,                      /* LT  */
+    LE = 270,                      /* LE  */
+    GT = 271,                      /* GT  */
+    GE = 272,                      /* GE  */
+    SCANF = 273,                   /* SCANF  */
+    PRINTF = 274,                  /* PRINTF  */
+    IDENTIF = 275,                 /* IDENTIF  */
+    INT_VALUE = 276,               /* INT_VALUE  */
+    FLOAT_VALUE = 277,             /* FLOAT_VALUE  */
+    DOUBLE_VALUE = 278,            /* DOUBLE_VALUE  */
+    STRING = 279,                  /* STRING  */
+    FILENAME = 280,                /* FILENAME  */
+    IFX = 281                      /* IFX  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -90,7 +92,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 29 "compiler.y"
+#line 31 "compiler.y"
 
     int intVal;
     float floatVal;
@@ -101,7 +103,7 @@ union YYSTYPE
     std::string* func;
     char* stringVal;
 
-#line 105 "compiler.tab.h"
+#line 107 "compiler.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

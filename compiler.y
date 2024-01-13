@@ -5,6 +5,8 @@
     #include <cstdarg>
     #include <string.h>
 
+    extern FILE * yyin;
+
     nodeType *nodOper (int oper, int nops, ...);
     nodeType *nodId (std::string id);
     nodeType *nodConst (ValType valType, int intVal, float floatVal, double doubleVal);
@@ -37,7 +39,7 @@
     char* stringVal;
 }
 
-%token ERROR
+%token ERROR RUN
 %token INT FLOAT DOUBLE
 %token IF ELSE WHILE RETURN 
 %token EQ NE LT LE GT GE
@@ -47,6 +49,7 @@
 %token <floatVal> FLOAT_VALUE
 %token <doubleVal> DOUBLE_VALUE
 %token <stringVal> STRING
+%token <key> FILENAME
 
 %left ','
 %left EQ NE LT LE GT GE '<' '>'
@@ -126,10 +129,18 @@ statement: INT IDENTIF ';'                                          {
     |      WHILE '(' expression ')' statement                       { $$ = nodOper(WHILE, 2, $3, $5);}
     |      RETURN expression ';'                                    { $$ = nodOper(RETURN, 1, $2);}
     |      expression ';'                                           { $$ = $1; }
-    |      ';'                                                      { $$ = nodConst((ValType)1, 0, 0.0, 0.0);}
+    |      ';'                                                      { 
+                                                                        $$ = nodConst((ValType)1, 0, 0.0, 0.0);
+                                                                    }
     |      SCANF '(' IDENTIF ')' ';'                                { $$ = nodOper(SCANF, 1, nodId(*$3));}
     |      PRINTF '(' STRING ')' ';'                                { $$ = nodOper(PRINTF, 1, nodConst($3)); }
     |      PRINTF '(' STRING ',' IDENTIF ')' ';'                    { $$ = nodOper(PRINTF, 2, nodConst($3), nodId(*$5)); }
+    |      RUN FILENAME                                             { 
+                                                                        std::string filename=*$2;
+                                                                        FILE* fp=fopen(filename.c_str(),"r");
+                                                                        yyin=fp;
+                                                                        yyparse();
+                                                                    }
     ;
 expression: IDENTIF                                                 { $$ = nodId(*$1); }
     |       INT_VALUE                                               { $$ = nodConst((ValType)1, $1, 0.0, 0.0); }
